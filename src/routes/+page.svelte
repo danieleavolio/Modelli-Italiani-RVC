@@ -63,6 +63,13 @@
 	<title>Lista modelli Italiani 🇮🇹</title>
 </svelte:head>
 <main>
+	<!-- svelte-ignore a11y-missing-content -->
+	<a
+		class="button github"
+		rel="external"
+		target="_blank"
+		href="https://github.com/danieleavolio/Modelli-Italiani-RVC">GITHUB REPOSITORY</a
+	>
 	<h1>Lista dei modelli Italiani &#x1f1ee;&#x1f1f9;</h1>
 	<div class="search">
 		<input
@@ -73,7 +80,7 @@
 		/>
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
-		<span on:click={()=> inputFilter.value=''}> ❌ </span>
+		<span on:click={() => (inputFilter.value = '')}> ❌ </span>
 	</div>
 	<div class="type-selector">
 		<button on:click={() => filterByTag('Content Creator')} class="button creator"
@@ -108,7 +115,7 @@
 				<p>{item.autore}</p>
 				<p>{item.descrizione}</p>
 				<img src={item.img_src} alt="" />
-				<a rel=external target="_blank"  class="button" href={item.link}> Link </a>
+				<a rel="external" target="_blank" class="button" href={item.link}> Link </a>
 			</div>
 		{/each}
 	</div>
@@ -153,7 +160,7 @@
 		justify-items: center;
 	}
 
-	.search{
+	.search {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -164,7 +171,7 @@
 		position: relative;
 	}
 
-	span{
+	span {
 		position: absolute;
 		right: 0;
 		cursor: pointer;
@@ -182,6 +189,47 @@
 		border: none;
 		outline: none;
 		font-size: 1.1em;
+	}
+
+	/* animation for rainbow border colors for input type text */
+	input[type='text'] {
+		animation: rainbow 3s ease-in-out infinite;
+	}
+
+	@keyframes rainbow {
+		0% {
+			border: 3px solid #ff6d6d;
+		}
+		10% {
+			border: 3px solid #ffda6d;
+		}
+		20% {
+			border: 3px solid #fff18b;
+		}
+		30% {
+			border: 3px solid #cfff6d;
+		}
+		40% {
+			border: 3px solid #6dff6d;
+		}
+		50% {
+			border: 3px solid #6ddfff;
+		}
+		60% {
+			border: 3px solid #6d8aff;
+		}
+		70% {
+			border: 3px solid #c86dff;
+		}
+		80% {
+			border: 3px solid #ff6dd6;
+		}
+		90% {
+			border: 3px solid #ff6d8b;
+		}
+		100% {
+			border: 3px solid #ff6d6d;
+		}
 	}
 
 	.type-selector {
@@ -303,6 +351,16 @@
 
 	.reset:hover {
 		background-color: rgb(92, 16, 16);
+		color: #ececec;
+	}
+
+	.github {
+		background-color: #ececec;
+		color: black;
+	}
+
+	.github:hover {
+		background-color: #222;
 		color: #ececec;
 	}
 
