@@ -34,7 +34,7 @@
 
 	// On click, copy the item.link in the clipboard
 	const copy = () => {
-
+		
 		dispatch('copy', {
 			text: item.link
 		});

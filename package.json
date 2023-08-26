@@ -11,7 +11,7 @@
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
 		"gh-pages": "npm run build && npx gh-pages -d build",
-		"update": "npm run build && git add . && git commit -m 'update' && git push origin main"
+		"update": " npm run build && git add . && git commit -m 'update' && git push origin main"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",

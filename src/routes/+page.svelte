@@ -66,7 +66,8 @@
 		}, 300);
 	};
 
-	const showCopyNotification = () =>{
+	const copyLink = (event:Event) =>{
+		
 		let notification = {
 			title: 'Copiato',
 			message: 'Link copiato negli appunti',
@@ -74,6 +75,11 @@
 			autoDismissible: true,
 			countdownDuration: 2000
 		};
+
+		// Copy link to clipboard
+		navigator.clipboard.writeText((event as CustomEvent).detail.text);
+
+		
 
 		notficationService.push(notification);
 	}
@@ -137,7 +143,7 @@
 	</div>
 	<div class="content_frame">
 		{#each datasetToRender as item, i (i)}
-				<Item {item} on:copy={()=> showCopyNotification()}/>
+				<Item {item} on:copy={copyLink}/>
 				{/each}
 	</div>
 	<button on:click={() => scrollTop()} class="back-top">BACK TOP</button>
