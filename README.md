@@ -1,38 +1,22 @@
-# create-svelte
+# Lista modelli Italiani RVC 
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+![Home](https://i.imgur.com/DtijuGr.png)
+Questo sito è stato creato per raccogliere tutti i modelli italiani per RVC. E' una rimodellazione del sito [Modelli Italiani](https://rentry.org/modelli-italiani) che è stato creato:
 
-## Creating a project
+- Ilaria Ilaria - Creatrice, Organizer, Editor.
+- Para Para - Organizer, Editor, Consigliere.
+- Kakao Kakao - Checker, Tester.
+- Ryanz Ryanz - Checker, Tester.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Come funziona
+Il sito utilizza un *json* statico che ha all'interno il contenuto del sito precedentemente citato e lo mostra in una pagina web. Viene utilizzato il framework **SveleKit**.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## Come contribuire
+Chiunque è libero di contribuire al progetto, per farlo basta seguire questi passaggi:
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+1. Forkare il progetto
+2. Modificare il sito come si vuole
+3. Creare una pull request
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+## Come aggiungere un modello
+Questa funzione non è ancora stata implementata, ma verrà aggiunta in futuro se dovesse essere tornare utile questo sito ai creaotri di quello originale.
