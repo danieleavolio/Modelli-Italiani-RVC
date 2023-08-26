@@ -1,5 +1,5 @@
 {
-	"runtime": "nodejs16.x",
+	"runtime": "nodejs18.x",
 	"handler": "..\\..\\..\\..\\..\\..\\Lovaion\\University\\Code\\Python\\modelli-italiani\\.svelte-kit\\vercel-tmp\\index.js",
 	"launcherType": "Nodejs",
 	"experimentalResponseStreaming": true
