@@ -108,7 +108,7 @@
 				<p>{item.autore}</p>
 				<p>{item.descrizione}</p>
 				<img src={item.img_src} alt="" />
-				<a target="_blank" class="button" href={item.link}> Link </a>
+				<a rel=external target="_blank"  class="button" href={item.link}> Link </a>
 			</div>
 		{/each}
 	</div>
