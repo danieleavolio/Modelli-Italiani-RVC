@@ -1,5 +1,5 @@
 
-export interface Item {
+export interface ItemDAO {
     tipo: string;
     strong_text: string;
     autore: string;

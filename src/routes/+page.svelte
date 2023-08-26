@@ -1,12 +1,24 @@
 <script lang="ts">
-	import type { Item } from '$lib/classes';
-	import { Notification, NotificationService } from '@dflare/svelte-enhanced-notifications';
+	import Item from '$lib/components/Item.svelte';
 
-	// get fata from +page.server.ts
+	import type { ItemDAO } from '$lib/classes';
+	import { NotificationService } from '@dflare/svelte-enhanced-notifications';
+	
 	export let data: any;
-	import { flip } from 'svelte/animate';
-	let dataset: Item[] = data.props.dataset.data;
-	let filteredDataset: Item[] = dataset;
+
+	const NEW_CONFIGS = {
+		center: {
+			zIndex: 1000,
+			top: '50%',
+			left: '50%',
+			transform: 'translate(-50%, -50%)',
+			position: "fixed",
+		}
+	}
+
+	
+	let dataset: ItemDAO[] = data.props.dataset.data;
+	let filteredDataset: ItemDAO[] = dataset;
 	let inputFilter: HTMLInputElement;
 	let isTagSelected: boolean = false;
 	let notficationService: NotificationService;
@@ -54,6 +66,18 @@
 		}, 300);
 	};
 
+	const showCopyNotification = () =>{
+		let notification = {
+			title: 'Copiato',
+			message: 'Link copiato negli appunti',
+			variant: 'success',
+			autoDismissible: true,
+			countdownDuration: 2000
+		};
+
+		notficationService.push(notification);
+	}
+
 	const scrollTop = () => {
 		window.scrollTo({ top: 0, behavior: 'smooth' });
 	};
@@ -62,6 +86,7 @@
 <svelte:head>
 	<title>Lista modelli Italiani 🇮🇹</title>
 </svelte:head>
+<NotificationService bind:this={notficationService} location="center" locations={NEW_CONFIGS}/>
 <main>
 	<!-- svelte-ignore a11y-missing-content -->
 	<a
@@ -80,7 +105,7 @@
 		/>
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
-		<span on:click={() => (inputFilter.value = '')}> ❌ </span>
+		<span class="clear" on:click={() => (inputFilter.value = '')}> ❌ </span>
 	</div>
 	<div class="type-selector">
 		<button on:click={() => filterByTag('Content Creator')} class="button creator"
@@ -90,6 +115,12 @@
 		<button on:click={() => filterByTag('Personaggi Famosi')} class="button famosi"
 			>Personaggi Famosi</button
 		>
+		<button
+			on:click={() => filterByTag('Attori, Doppiatori e Conduttori Film/TV')}
+			class="button film/tv"
+		>
+			Attori, Doppiatori e Conduttori Film/TV
+		</button>
 		<button on:click={() => filterByTag('Personaggi Cartoni di Film/TV')} class="button film/tv">
 			Personaggi Cartoni di Film/TV
 		</button>
@@ -106,21 +137,10 @@
 	</div>
 	<div class="content_frame">
 		{#each datasetToRender as item, i (i)}
-			<div
-				class="item {item.tipo.split(' ')[item.tipo.split(' ').length - 2].toLowerCase()}"
-				animate:flip
-			>
-				<h2>{item.strong_text}</h2>
-				<h3>{item.tipo}</h3>
-				<p>{item.autore}</p>
-				<p>{item.descrizione}</p>
-				<img src={item.img_src} alt="" />
-				<a rel="external" target="_blank" class="button" href={item.link}> Link </a>
-			</div>
-		{/each}
+				<Item {item} on:copy={()=> showCopyNotification()}/>
+				{/each}
 	</div>
 	<button on:click={() => scrollTop()} class="back-top">BACK TOP</button>
-	<NotificationService bind:this={notficationService} location="center" />
 </main>
 
 <style>
@@ -134,9 +154,6 @@
 		position: relative;
 	}
 
-	img {
-		border: 1px solid #ececec;
-	}
 
 	.back-top {
 		position: fixed;
@@ -160,6 +177,8 @@
 		justify-items: center;
 	}
 
+	
+
 	.search {
 		display: flex;
 		justify-content: center;
@@ -171,7 +190,7 @@
 		position: relative;
 	}
 
-	span {
+	.clear {
 		position: absolute;
 		right: 0;
 		cursor: pointer;
@@ -180,6 +199,7 @@
 		border-radius: 100%;
 	}
 
+	
 	input[type='text'] {
 		width: 100%;
 		padding: 0.5em;
@@ -239,23 +259,7 @@
 		margin: 1em auto;
 	}
 
-	.item {
-		width: 300px;
-		margin: 1em;
-		background-color: rgb(52, 52, 52);
-		display: grid;
-		grid-template-rows: 1fr 0.5fr 1fr 0.5fr;
-		padding: 1em;
-		gap: 0.3em;
-		border-radius: 1em;
-		place-items: center;
-		color: #ececec;
-	}
-
-	.item img {
-		height: auto;
-		border-radius: 100%;
-	}
+	
 
 	.button {
 		padding: 0.5em;
@@ -280,65 +284,53 @@
 		font-weight: 600;
 	}
 
-	.creator,
-	.creator .button {
+	.creator{
 		border: rgb(255, 92, 92) 2px solid;
 	}
 
-	.creator .button:hover,
 	.type-selector .creator:hover {
 		background-color: rgb(255, 92, 92);
 	}
 
-	.cantanti,
-	.cantanti .button {
+	.cantanti{
 		border: rgb(92, 255, 92) 2px solid;
 	}
 
-	.cantanti .button:hover,
 	.type-selector .cantanti:hover {
 		background-color: rgb(92, 255, 92);
 		color: #222;
 	}
 
-	.famosi,
-	.famosi .button {
+	.famosi{
 		border: rgb(92, 92, 255) 2px solid;
 	}
 
-	.famosi .button:hover,
 	.type-selector .famosi:hover {
 		background-color: rgb(92, 92, 255);
 	}
 
-	.film\/tv,
-	.film\/tv .button {
+	.film\/tv {
 		border: rgb(75, 255, 195) 2px solid;
 	}
 
-	.film\/tv .button:hover,
 	.type-selector .film\/tv:hover {
 		background-color: rgb(75, 255, 195);
 		color: #222;
 	}
 
-	.videogiochi,
-	.videogiochi .button {
+	.videogiochi{
 		border: rgb(255, 255, 92) 2px solid;
 	}
 
-	.videogiochi .button:hover,
 	.type-selector .videogiochi:hover {
 		background-color: rgb(255, 255, 92);
 		color: #222;
 	}
 
-	.altro,
-	.altro .button {
+	.altro{
 		border: rgb(255, 190, 92) 2px solid;
 	}
 
-	.altro .button:hover,
 	.type-selector .altro:hover {
 		background-color: rgb(255, 190, 92);
 		color: #222;
@@ -373,4 +365,6 @@
 			gap: 0;
 		}
 	}
+
+	
 </style>
