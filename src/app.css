@@ -1,0 +1,16 @@
+/* Import roboto font */
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    /* Make a matte black background */
+    background-color: #222;
+    scroll-behavior: smooth;
+}
